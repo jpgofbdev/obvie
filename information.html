@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Informations</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 2em;
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #2a7ae2;
+      margin-bottom: 1em;
+    }
+
+    p, .note {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #555;
+    }
+
+    .note {
+      border-top: 1px solid #ddd;
+      margin-top: 2em;
+      padding-top: 1em;
+    }
+
+    strong {
+      color: #000;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 2em;
+      text-decoration: none;
+      color: #2a7ae2;
+      font-weight: bold;
+      border: 1px solid #2a7ae2;
+      padding: 0.5em 1em;
+      border-radius: 8px;
+      transition: background-color 0.2s, color 0.2s;
+    }
+
+    .back-link:hover {
+      background-color: #2a7ae2;
+      color: #fff;
+    }
+
+    .licence-box {
+      border-left: 4px solid #2a7ae2;
+      background-color: #f0f8ff;
+      padding: 1em;
+      margin: 1em 0;
+      display: flex;
+      align-items: center;
+      gap: 1em;
+    }
+
+    .licence-box img {
+      height: 40px;
+    }
+
+    .licence-box-text {
+      margin: 0;
+      font-size: 1rem;
+      color: #333;
+    }
+
+    .licence-box-text a {
+      color: #2a7ae2;
+      text-decoration: none;
+    }
+
+    .licence-box-text a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📄 Informations</h1>
+
+    <p>
+      Cette application est éditée et maintenue par la Direction OFB Centre-Val de Loire.<br>
+      Elle ne nécessite pas de serveur d'application.<br>
+      Les données sont mises à jour en continu par les éditeurs des flux cartographiques sollicités.
+    </p>
+
+    <div class="licence-box">
+        <p class="licence-box-text">
+        Les données proposées sont ouvertes, diffusables, mises à disposition sous la 
+        <a href="https://www.etalab.gouv.fr/licence-ouverte-open-licence" target="_blank">
+          Licence Ouverte / Open Licence version 2.0
+        </a>, également connue sous le nom de <em>licence Etalab-2.0</em>.
+      </p>
+    </div>
+
+    <p>
+      Deux évolutions sont en cours :<br>
+      - ajout des périmètres de protection des captages (ppi, ppr, ppe)<br>
+      - ajout des AAC (aires d'alimentation des captages)
+    </p>
+
+    <div class="note">
+      🧪 Cette première version <strong>(v0.1 - avril 2025)</strong> est un prototype.<br>
+      📬 Pour signaler un dysfonctionnement ou proposer une amélioration, écrivez à :<br>
+      <strong>jean-philippe.goyen[at]ofb.gouv.fr</strong>
+    </div>
+
+    <a href="index.html" class="back-link">⬅️ Retour à l'application</a>
+  </div>
+</body>
+</html>

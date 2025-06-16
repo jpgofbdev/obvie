@@ -1,0 +1,134 @@
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        #header {
+            height: 50px;
+            background-color: #fff;
+            border-bottom: 3px solid #1f4764;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-sizing: border-box;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        #header img {
+            height: 40px;
+        }
+        #header h1 {
+            color:#1f4764;
+            margin: 0;
+            font-size: 20px;
+            flex: 1;
+            text-align: center;
+        }
+        .small-italic {
+            font-style: italic; /* Applique l'italique */
+            font-size: 0.6em;   /* Réduit la taille du texte */
+        }
+        #header .right-text {
+            font-size: 12px;
+            color:#1f4764;
+        }
+        #header .icons {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        #map {
+            height: calc(100vh - 50px);
+            width: 100%;
+            margin-top: 50px;
+        }
+        .download-button {
+            position: absolute;
+            bottom: 10px;
+            background-color: white;
+            border: 2px solid#1f4764;
+            border-radius: 12px;
+            padding: 10px;
+            z-index: 1000;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .download-button {
+            left: 10px;
+        }
+       
+        #zoom-level {
+            position: absolute;
+            bottom: 10px;
+            right: 50%;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 5px;
+            border-radius: 5px;
+            z-index: 1000;
+            transform: translateX(50%);
+            font-size: 9px;
+        }
+
+        .watershed-logo {
+            max-width: 40px;
+            vertical-align: middle;
+            margin-left: 10px;
+        }
+
+/* Style du bouton du menu déroulant */
+/* Style du bouton du menu déroulant */
+/* Style du bouton du menu déroulant *//* Style du bouton du menu déroulant */
+
+
+
+
+
+#file-input {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000; /* Pour que le bouton apparaisse au-dessus de la carte */
+            padding: 10px;
+            background-color: white;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .custom-points-layer {
+    z-index: 1500; /* Assurez-vous que ce z-index est supérieur à celui des autres couches */
+}
+
+
+
+
+#controls-container {
+    display: none; /* Masqué par défaut */
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 5px;
+    position: absolute; /* Pour positionner au-dessus de la carte */
+    top: 100px; /* Ajustez la position selon vos besoins */
+    left: 20px; /* Ajustez la position selon vos besoins */
+    z-index: 1000; /* Assurez-vous que le conteneur est au-dessus de la carte */
+}
+
+#controls-container.show {
+    display: block; /* Affiché quand la classe show est ajoutée */
+}
+
+#toggle-controls {
+    position: absolute; /* Pour positionner au-dessus de la carte */
+    top: 80px; /* Ajustez la position selon vos besoins */
+    left: 20px; /* Ajustez la position selon vos besoins */
+    z-index: 1000; /* Assurez-vous que le bouton est au-dessus de la carte */
+}
+
+.sous-titre {
+    color: #0056A2;
+    font-style: italic;
+    font-size: 0.8em; /* Ajuste la taille pour mobile */
+    text-align: center; /* Centrer le texte, optionnel */
+}

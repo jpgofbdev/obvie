@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OBVIE outil bassin versant</title>
+    <!-- Inclure la feuille de style Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="./obvie.css">
+    <link rel="icon" href="logo_obvie_v.png" type="image/png">
+
+<style>
+ /* CSS pour le conteneur des contrôles */
+ 
+
+</style>
+
+</head>
+
+<script>
+    function showInstallInstructions() {
+      alert("Pour ajouter cette application à l'écran d'accueil :\n\n• Sur Android (Chrome) : menu ⋮ puis 'Ajouter à l'écran d'accueil'.\n• Sur iPhone (Safari) : bouton partager → 'Sur l’écran d’accueil'.");
+    }
+  </script>
+  
+
+<body>
+    <div id="header" style="height: 50px; display: flex; align-items: center; justify-content: center;">
+       <!-- <img src="logo.jpg" alt="Logo OFB" style="height: 100%; margin-right: 10px;"> <!-- Logo OFB à gauche --> 
+        <img src="./obvie_full.png" alt="Logo OBVIE" style="max-height: 100%; width: auto;"> <!-- Logo OBVIE au centre -->
+        <div style="margin-left: 10px;"> <!-- Espacement pour le texte -->
+          <h1 style="margin: 0; font-size: 14px;">
+            <span class="small-italic">Outil Bassin Versant pour les Inspecteurs de l'Environnement</span>
+          </h1>
+        </div>
+       <!--  <div class="right-text" style="margin-left: auto;">produit par la DR CVL</div> Aligné à droite -->
+        <div class="icons" style="margin-left: 10px;">
+          <a href="./modedemploi.html" title="Mode d'emploi">&#x1F4D6;</a>
+          <a href="./information.html" title="Informations">&#x2139;</a>
+          <a href="#" onclick="showInstallInstructions()" title="Ajouter à l'accueil">&#x1F4F1;</a>
+
+
+        </div>
+      </div>
+      
+      
+      
+    
+    <div id="map"></div>
+    <div id="controls-container" class="collapsed"> <!-- Ajoute une classe par défaut -->
+        <div class="checkbox-group">
+            <label class="checkbox-group">
+                <input type="checkbox" id="bboxbvorange-checkbox">
+                Afficher BBOX
+            </label>
+        </div>
+        <div class="checkbox-group" style="display: flex; align-items: center;">
+            <input type="checkbox" id="pollueurs-checkbox">
+            <label for="pollueurs-checkbox" style="margin-right: 10px;">Établissements pollueurs BoundBOX du BV</label>
+            <img src="https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-black.png" 
+                 alt="Légende Pollueurs" style="width: 20px; height: 30px; vertical-align: middle;">
+        </div>
+        
+        <div class="checkbox-group" style="display: flex; align-items: center;">
+            <input type="checkbox" id="step-checkbox">
+            <label for="step-checkbox" style="margin-right: 10px;">Stations d'épuration BBOX du BV</label>
+            <img src="https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-orange.png" 
+                 alt="Légende step" style="width: 20px; height: 30px; vertical-align: middle;">
+        </div>
+
+        <div class="checkbox-group" style="display: flex; align-items: center;">
+            <input type="checkbox" id="icpe-checkbox">
+            <label for="icpe-checkbox" style="margin-right: 10px;">ICPE dans un rayon de 10km</label>
+            <img src="https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png" 
+                 alt="Légende icpe" style="width: 20px; height: 30px; vertical-align: middle;">
+        </div>
+
+        <div class="checkbox-group">
+            <label>
+                <input type="checkbox" id="topagecebbox-checkbox" /> Cours d'eau BDTOPAGE
+            </label>
+        </div>
+
+        <div class="checkbox-group">
+            <input type="checkbox" id="AAC-checkbox">
+            <label for="AAC-checkbox">Aires d'alimentation des captages (AAC)</label>
+          </div>
+          
+          <div class="checkbox-group">
+            <input type="checkbox" id="PPR-checkbox">
+            <label for="PPR-checkbox">Périmètres de protection des captages (PPR)</label>
+          </div>
+          
+
+
+
+
+
+    </div>
+     
+    
+
+
+
+<!-- 	//<button id="download-button" class="download-button">Télécharger geojson bassin versant EPSG4326</button>
+ -->   
+    <label class="bboxbvorange-checkbox">
+        <input type="checkbox" id="bboxbvorange-checkbox">
+        Afficher BBOX
+    </label>
+    <div id="zoom-level">Double cliquer pour déterminer un bassin versant  </div>
+
+    <button id="toggle-controls" style="display: none;">Déplier choix des couches à afficher</button>
+
+<!--  SCRIPT MODULES
+    ////////////////////////////////////////////////////////////////////// -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.6.2/proj4.js"></script>
+    <script src="https://unpkg.com/shpjs@latest/dist/shp.js"></script>
+    <script src="./jszip.js"></script>
+    <script src="./turf.min.js" charset="utf-8"></script>
+    <script src="https://ignf.github.io/geoportal-extensions/leaflet-latest/dist/GpPluginLeaflet.js"></script>
+    <!-- <script src="./main_loc2_nofile.js"></script> -->
+    <script src="./event.js"></script>
+
+    <script type="module" src="./mainoct.js"></script>
+    <script>
+
+
+        // Gestion du menu déroulant
+        document.getElementById('toggle-controls').addEventListener('click', function() {
+            const controlsContainer = document.getElementById('controls-container');
+            
+            // Basculer la classe "show"
+            controlsContainer.classList.toggle('show');
+
+            // Mettre à jour le texte du bouton
+            if (controlsContainer.classList.contains('show')) {
+                this.textContent = 'Replier choix des couches à afficher';
+            } else {
+                this.textContent = 'Déplier choix des couches à afficher';
+            }
+        });
+    </script>
+
+
+</body>
+</html>
