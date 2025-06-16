@@ -443,7 +443,54 @@ document.getElementById('checkbox-41').addEventListener('change', function(event
 
 
 
-        window.addEventListener('load', initializeMap);
+        
+function addSearchControl(){
+  const SearchControl = L.Control.extend({
+    options: { position: 'bottomleft' },
+    onAdd: () => {
+      const div = L.DomUtil.create('div', 'leaflet-control-search');
+      div.innerHTML = '<input id="searchCommune" list="suggestions" placeholder="Commune" autocomplete="off"/><datalist id="suggestions"></datalist>';
+      L.DomEvent.disableClickPropagation(div);
+      return div;
+    }
+  });
+
+  map.addControl(new SearchControl());
+
+  const input = document.getElementById('searchCommune');
+  const dl = document.getElementById('suggestions');
+
+  input.addEventListener('input', () => {
+    const v = input.value;
+    if (v.length < 3) return;
+    fetch(`https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(v)}&type=municipality`)
+      .then(r => r.json())
+      .then(data => {
+        dl.innerHTML = '';
+        data.features.forEach(f => {
+          const opt = document.createElement('option');
+          opt.value = f.properties.name;
+          opt.dataset.lat = f.geometry.coordinates[1];
+          opt.dataset.lon = f.geometry.coordinates[0];
+          dl.appendChild(opt);
+        });
+      });
+  });
+
+  input.addEventListener('change', () => {
+    const val = input.value;
+    Array.from(dl.options).forEach(opt => {
+      if (opt.value === val) {
+        map.setView([opt.dataset.lat, opt.dataset.lon], 12);
+      }
+    });
+  });
+}
+
+
+addSearchControl();
+
+window.addEventListener('load', initializeMap);
 
         function enableGeolocation(map) {
     var geoMarker = null;  // Initialement aucun marqueur
